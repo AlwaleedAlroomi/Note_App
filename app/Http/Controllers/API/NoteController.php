@@ -34,6 +34,13 @@ class NoteController extends BaseController
             'content' => 'required',
         ]);
 
+        if ($request->has('photo')) {
+            $photo = $request->photo;
+            $newPhoto = time() . $photo->getClientOriginalName();
+            $photo->move('uploads/notes/', $newPhoto);
+            $input['photo'] = 'uploads/notes/' . $newPhoto;
+        }
+
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
         }
@@ -51,6 +58,7 @@ class NoteController extends BaseController
             'title' => 'required',
             'content' => 'required',
         ]);
+
 
         if ($validator->fails()) {
             return $this->sendError('Validate Error', $validator->errors());
