@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
@@ -16,8 +17,9 @@ class NoteController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $notes = Note::where("user_id", Auth::id())->get();
-        return view('notes.index')->with('notes', $notes);
+        return view('notes.index')->with('notes', $notes)->with('user', Auth::user());
     }
 
     public function create()
@@ -29,20 +31,20 @@ class NoteController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'photo' => 'required'
         ]);
 
-        if ($request->has('photo')) {
-            $photo = $request->photo;
-            $newPhoto = time() . $photo->getClientOriginalName();
-            $photo->move('uploads/notes', $newPhoto);
-            $request->photo = 'uploads/notes/' . $newPhoto;
-        }
+        $photo = $request->photo;
+        $newPhoto = time() . $photo->getClientOriginalName();
+        $photo->move('uploads/notes/', $newPhoto);
+
 
         $note = Note::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'content' => $request->content,
+            'photo' => 'uploads/notes/' . $newPhoto,
         ]);
 
         return redirect($to = 'notes');

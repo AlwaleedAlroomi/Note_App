@@ -6,10 +6,8 @@
         <div class="row">
             <div class="col">
                 <div class="jumbotron">
-                    <h1 class="display-4">Hello, {{$user->name}}!</h1>
-                    <p class="lead"><strong>All Notes.</strong></p>
-                    <a class="btn btn-success" href="{{route('note.create')}}">Add Note &nbsp;<i class="fas fa-plus"></i></a>&nbsp;
-                    <a class="btn btn-danger" href="{{route('notes.trashed')}}">Deleted Notes &nbsp;<i class="far fa-trash-alt"></i></a>
+                    <p class="lead"><strong>All Deleted Notes.</strong></p>
+                    <a class="btn btn-primary" href="{{route('notes')}}">All Notes</a>
                 </div>
             </div>
         </div>
@@ -28,8 +26,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$item->title}}</h5>
                   <p class="card-text">{{$item->content}}.</p>
-                  <a href="{{route('note.show', ['id' => $item->id])}}" class="btn btn-primary">show</a>&nbsp;
-                  <a href="{{route('note.destroy', ['id' => $item->id])}}" class="btn btn-danger">Delete</a>
+                  <a href="{{route('note.restore', ['id' => $item->id])}}" class="btn btn-primary">Restore&nbsp;<i class="fas fa-trash-restore"></i></a>&nbsp;
+                  <a href="{{route('note.hdelete', ['id' => $item->id])}}" class="btn btn-primary">Force Delete&nbsp;<i class="far fa-trash-alt"></i></a>
                 </div>
             </div> &nbsp;
             @endforeach
