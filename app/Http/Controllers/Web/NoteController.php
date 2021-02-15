@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Note;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller as Controller;
 
 class NoteController extends Controller
 {
@@ -17,7 +17,6 @@ class NoteController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $notes = Note::where("user_id", Auth::id())->get();
         return view('notes.index')->with('notes', $notes)->with('user', Auth::user());
     }

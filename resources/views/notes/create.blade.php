@@ -16,7 +16,7 @@
                     <textarea class="form-control" name="content" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Example textarea</label>
+                  <label for="exampleFormControlTextarea1">Photo</label>
                   <input class="form-control" type="file" name="photo">
                 </div>
                 <div class="form-group">
