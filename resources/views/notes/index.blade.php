@@ -23,13 +23,14 @@
         </div>
         <div class="row">
             @foreach ($notes as $item)
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{URL::asset($item->photo)}}" alt="No Picture for this">
+            <div class="card h-1000" style="width: 20rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{$item->title}}</h5>
+                  <img class="card-img-top" src="{{URL::asset($item->photo)}}" alt="{{$item->photo}}" width="200px" height="250px">
                   <p class="card-text">{{$item->content}}.</p>
-                  <a href="{{route('note.show', ['id' => $item->id])}}" class="btn btn-primary">show</a>&nbsp;
-                  <a href="{{route('note.destroy', ['id' => $item->id])}}" class="btn btn-danger">Delete</a>
+                  <a href="{{route('note.show', $item->id)}}" class="btn btn-success">show <i class="far fa-eye"></i></a>&nbsp;
+                  <a href="{{route('note.edit', $item->id)}}" class="btn btn-primary">Edit <i class="far fa-edit"></i></a>&nbsp;
+                  <a href="{{route('note.destroy', $item->id)}}" class="btn btn-danger">Delete <i class="far fa-trash-alt"></i></a>
                 </div>
             </div> &nbsp;
             @endforeach
