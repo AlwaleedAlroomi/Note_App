@@ -4,16 +4,16 @@
 
 <div class="container">
     <div class="row">
-    @if (count($errors) > 0)
+        <div class="col">
+         @if (count($errors) > 0)
         <ul>
             @foreach ($errors->all() as $item)
-                    <li>
-                        {{$item}}
-                    </li>
+                <div class="alert alert-danger" role="alert">
+                    {{$item}}
+                </div>
             @endforeach
         </ul>
         @endif
-        <div class="col">
             <form action="{{route('note.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
