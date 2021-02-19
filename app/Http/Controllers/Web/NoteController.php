@@ -51,13 +51,13 @@ class NoteController extends Controller
 
     public function show($id)
     {
-        $note = Note::find($id);
+        $note = Note::findOrFail($id);
         return view('notes.show')->with('note', $note);
     }
 
     public function edit($id)
     {
-        $note = Note::find($id);
+        $note = Note::findOrFail($id);
         return view('notes.edit')->with('note', $note);
     }
 
